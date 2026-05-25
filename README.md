@@ -34,6 +34,12 @@ Convert the existing MotorPH Employee App from a console-based interface into a 
 
 ---
 
+### PORTAL LOGIN USERNAME & PASSWORD
+Username: employee
+Password: 12345
+
+---
+
 # Group Members:
 - Daniel Castro
 - Justine Nolie Tolentino
