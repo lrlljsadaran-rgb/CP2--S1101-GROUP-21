@@ -28,7 +28,7 @@ The graphical implementation features a fixed-dimension dashboard layout (1100x6
   * Interactive Control Triggers `Add New Record`, `Update Record`, and `Delete Record` buttons.
 
 ### 2. Right Action Panel (Data Visualization & Ledger)
-  * Employee Master Ledger Table (`JTable`):** Displays comprehensive 11-column matrices of employee data, structural identification details, and batch payroll balances. Cell inline editing is disabled to preserve data         integrity.
+  * Employee Master Ledger Table (`JTable`): Displays a comprehensive 12-column employee payroll ledger containing employee information, salary details, Gross Pay, Total Deductions, and Net Pay. Cell editing is disabled       to preserve data integrity.
   * Selected Employee Information Viewer: A dedicated display context panel that renders live detail maps (ID Number, Full Name, Gross Pay, and Net Pay) directly upon record row selection inside the ledger.
   * Computational Footers: Houses the dynamic multi-layered loading status indicator and the system-wide `Compute Salaries` execution button.
 
@@ -56,7 +56,8 @@ The graphical implementation features a fixed-dimension dashboard layout (1100x6
   * Placed all salary algorithms within a dedicated domain file (`SalaryComputationModule.java`).
   * Structured system-wide payroll routines over parallel dynamic arrays mapping individual daily wage arrays and time allocations to resolve gross pay.
   * Automated sequential deductions calculations tracking structural criteria matrices (SSS, PhilHealth, Pag-IBIG, and progressive Withholding Taxes) to extrapolate final Net Pay balances.
-  * Overwrites underlying flat CSV rows automatically with formatted 2-decimal scale values following successful batch calculation triggers.
+  * Overwrites underlying CSV records with formatted Gross Pay, Total Deductions, and Net Pay values following successful payroll computation.
+  * Displays a payroll computation report summarizing processed employees, total Gross Pay, deduction breakdown (SSS, PhilHealth, Pag-IBIG, and Withholding Tax), total deductions, and total Net Pay.
 
 ### MPHCR04 – Feature 4: Update and Delete Employee Records
 * Description: Completed total system CRUD operations by empowering operators to securely modify or purge existing database profiles.
@@ -64,6 +65,35 @@ The graphical implementation features a fixed-dimension dashboard layout (1100x6
   * Tied row selection events to extract indices directly from the `JTable` matrix, mapping chosen data arrays seamlessly back into editable input fields.
   * Implemented an inline updating engine that rewrites file records with new configurations upon successful data structure validation checks.
   * Integrated an administrative safety guard utilizing `JOptionPane` dialog boxes to verify operational intent before processing database delete triggers.
+
+### MPHCR05 – Feature 5: Payroll Summary Display
+
+* Description:
+  Implemented a payroll summary module that generates an overall summary of computed employee payroll information. The feature provides management with a quick overview of payroll statistics and allows the generated report to be exported as a CSV file.
+
+* Technical Implementations:
+  * Added a dedicated `Generate Summary` button that becomes useful after payroll computation.
+  * Computes the total number of employees, total gross pay, total deductions, average net pay, and overall payroll totals using existing employee records loaded from the CSV file.
+  * Validates that employee records exist and that payroll has already been computed before generating the summary.
+  * Displays the payroll summary using a `JOptionPane` dialog containing the computed payroll statistics.
+  * Added an optional CSV export feature through `PayrollSummaryExporter.java`, allowing users to save the generated payroll summary to a selected folder.
+  * Automatically generates a timestamped report filename and displays the file name and save location after a successful export.
+
+---
+## Payroll Summary Export
+
+The Payroll Summary module includes a CSV export option that enables users to save a generated payroll summary report to a user-selected directory.
+
+The exported report contains:
+
+* Report generation date and time
+* Total number of employees
+* Total Gross Pay
+* Total Deductions
+* Total Net Pay
+* Average Net Pay
+
+After a successful export, the system displays the generated filename and the folder where the report has been saved.
 
 ---
 
@@ -73,6 +103,7 @@ To ensure a stable environment and runtime safety, the platform relies on strict
 2. Numeric Validation: Protects numeric domains from invalid character types via intensive try-catch blocks and parsing routines.
 3. Data Conflict Resolution: Evaluates active record states prior to final commits to block duplicate index values from degrading file systems.
 4. Graceful Failures: Replaces runtime system breaks with readable `JOptionPane` alert messages to provide clear system status updates to users.
+5. Payroll Summary Validation: Prevents payroll summary generation when employee records are unavailable or payroll computation has not yet been completed.
 
 ---
 
