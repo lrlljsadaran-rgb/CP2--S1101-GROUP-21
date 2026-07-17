@@ -5,7 +5,7 @@ The goal of the MotorPH Employee App is to simulate a simplified employee payrol
 
 ---
 
-Project References: MPHCR01, MPHCR02, MPHCR03, MPHCR04
+Project References: MPHCR01, MPHCR02, MPHCR03, MPHCR04, MPHCR05
 
 ---
 
